@@ -1,6 +1,6 @@
 ## Установка
 
-git clone git@github.com:Neyaz/CompareTwoObjectsMethods.git .
+git clone https://github.com/Neyaz/CompareTwoObjectsMethods.git .
 
 composer install
 
