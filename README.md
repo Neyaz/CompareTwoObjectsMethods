@@ -6,4 +6,6 @@ composer install
 
 ## Запуск теста
 
+cd Test/
+
 phpunit --verbose CompareObjectsTest

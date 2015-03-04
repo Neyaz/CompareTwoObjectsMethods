@@ -19,14 +19,12 @@ class CompareTwoObjects
     public function CompereObjects($objectOne, $objectTwo)
     {
         $objectOneMethods = $this->getPublicAndProtectedMethods($objectOne);
-        $objectTwoMethods = $this->getPublicAndProtectedMethods($objectTwo);
+        $objectTwoMethods = $this->objectToArray($this->getPublicAndProtectedMethods($objectTwo));
         $sameMethods = [];
 
         foreach($objectOneMethods as $objectOneMethod){
-            foreach($objectTwoMethods as $objectTwoMethod){
-                if(strtolower($objectOneMethod->name) == strtolower($objectTwoMethod->name)){
-                    $sameMethods[] = $objectOneMethod->name;
-                }
+            if(in_array(strtolower($objectOneMethod->name), $objectTwoMethods)){
+                $sameMethods[] = $objectOneMethod->name;
             }
         }
 
@@ -45,5 +43,25 @@ class CompareTwoObjects
         $objectMethods = $object->getMethods(\ReflectionMethod::IS_PUBLIC | \ReflectionMethod::IS_PROTECTED);
 
         return $objectMethods;
+    }
+
+    /*
+     * Convert object to array
+     *
+     * @param ReflectionMethod $objectTwoMethods
+     *
+     * @return array
+     */
+    private function objectToArray($objectTwoMethods)
+    {
+        $methods = [];
+
+        foreach($objectTwoMethods as $method)
+        {
+            $methods[] = strtolower($method->name);
+
+        }
+
+        return $methods;
     }
 }
